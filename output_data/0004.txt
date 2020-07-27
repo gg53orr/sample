@@ -19,7 +19,11 @@
         "bedroom": [
             4
         ],
+        "living room": [
+            "1"
+        ],
         "property": [
+            "1",
             4
         ]
     },

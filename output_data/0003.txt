@@ -21,6 +21,12 @@
         ],
         "bedroom": [
             2
+        ],
+        "location": [
+            "1"
+        ],
+        "property": [
+            "1"
         ]
     },
     "noun_relations": {}

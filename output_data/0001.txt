@@ -10,8 +10,8 @@
             "central"
         ],
         "property": [
-            "flexible",
-            "Spacious"
+            "Spacious",
+            "flexible"
         ]
     },
     "noun_numeric": {
@@ -21,8 +21,18 @@
         "bedroom": [
             2
         ],
+        "garden": [
+            "1"
+        ],
+        "living room": [
+            "1"
+        ],
+        "location": [
+            "1"
+        ],
         "property": [
-            2
+            2,
+            "1"
         ]
     },
     "noun_relations": {}

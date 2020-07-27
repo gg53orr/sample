@@ -37,7 +37,7 @@ class DocumentComparator:
         :return:
         """
         if mode == "standard":
-            print("NOW")
+
             return self.docs[name]
         return self.analyses[name]
 
