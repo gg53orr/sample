@@ -79,6 +79,23 @@ class Analysis:
             relations = [[item2, determiner]]
             self.noun_relations[item1] = relations
 
+    def add_default_attribute(self, item):
+        """
+        When there is only the mention of an item
+        We assume for Western European language
+        presence of article
+        :param item:
+        :param determiner:
+        :return:
+        """
+        dictionary = self.get_dict("NUM")
+        if item in dictionary:
+            attributes = dictionary[item]
+            # This needs to be generalized
+            attributes.add("1")
+        else:
+            dictionary[item] = set(["1"])
+
     def add_attribute(self, item, original_token, determiner):
         """
 
@@ -183,10 +200,12 @@ class HouseAnalyzer:
                 for trigger in self.all_triggers:
 
                     if trigger in noun_phrase.text.lower():
+
                         start = noun_phrase.text.lower().index(trigger)
 
                         if not Range(start, len(noun_phrase.text) + start).intersection(covered):
                             item = self.triggers_to_keys[trigger]
+
                             covered.add(Range(noun_phrase.start, noun_phrase.end))
                             self.process_np(item, noun_phrase, doc, analysis)
 
@@ -201,15 +220,22 @@ class HouseAnalyzer:
         :param analysis:
         :return:
         """
+        attribute_found = False
         for token in noun_phrase:
 
             if is_relevant_attribute(token):
                 # We check next
                 determiner = self.normalizer.normalize_token(token)
+                attribute_found = True
                 if self.is_numeric_of_determiner(token, doc):
                     analysis.add_relation(item, determiner, doc[token.i + 1].text)
                 else:
                     analysis.add_attribute(item, token, determiner)
+        if not attribute_found:
+            # Eventually we can check here the presence of
+            # an article for EN/NO/DE/NL/ES etc, not for Slavic languages
+            # We assume there is at least one
+            analysis.add_default_attribute(item)
 
     def is_numeric_of_determiner(self, token, doc):
         """

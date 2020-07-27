@@ -5,7 +5,7 @@ import logging
 import spacy
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "analyzer"))
 from normalizer import TokenNormalizer, NumberConverter, NUMBER_ERROR
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 class TestHouseAnalyzer(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestHouseAnalyzer(unittest.TestCase):
         expected = ["We", "have", 2, "rooms"]
         for index, token in enumerate(doc):
             normalized_form = normalizer.normalize_token(token)
-            logger.debug(str(normalized_form) + " " + str(type(normalized_form)))
+            LOGGER.debug(str(normalized_form) + " " + str(type(normalized_form)))
             self.assertTrue(normalized_form == expected[index])
 
     def test_number_converter(self):
@@ -31,7 +31,7 @@ class TestHouseAnalyzer(unittest.TestCase):
         results = [NUMBER_ERROR, 1.2, 1222, 3, NUMBER_ERROR]
         for index, example in enumerate(examples):
             output = converter.to_number(example)
-            logger.debug(output)
+            LOGGER.debug(output)
             self.assertTrue(output == results[index])
 
 if __name__ == '__main__':
