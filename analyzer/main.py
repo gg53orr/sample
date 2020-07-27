@@ -35,8 +35,9 @@ def print_tokens(the_counter, output):
     :return:
     """
     all_items = sorted(the_counter.items(), key=itemgetter(0))
-    for item in all_items:
-        print(item)
+    with open(output + "/token_view.txt", encoding="utf-8", mode="w") as handle:
+        for item in all_items:
+            handle.write(str(item) + "\n")
 
 
 if __name__ == '__main__':

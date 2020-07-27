@@ -1,8 +1,8 @@
 {
     "noun_adjectives": {
         "bedroom": [
-            "double",
-            "third"
+            "third",
+            "double"
         ],
         "living room": [
             "top"
@@ -23,10 +23,10 @@
             3.0
         ],
         "living room": [
-            "1"
+            1
         ],
         "property": [
-            "1"
+            1
         ]
     },
     "noun_relations": {}

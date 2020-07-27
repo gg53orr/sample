@@ -1,5 +1,5 @@
 {
-	"bathroom": ["bathroom", "bath", "toilette", "restroom"],
+	"bathroom": ["bathroom", "bath", "toilette", "restroom", "w/c"],
 	"bedroom": ["bedroom", "bed room"],
 	"living room": ["living room", "reception", "reception room", "receptions room", "reception area", "reception space"],
 	"property": ["apartment", "maisonette", "house", "accommodation", "home", "flat"],

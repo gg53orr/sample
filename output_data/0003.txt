@@ -7,12 +7,12 @@
             "double"
         ],
         "living room": [
-            "large",
-            "open"
+            "open",
+            "large"
         ],
         "property": [
-            "wonderful",
-            "contemporary"
+            "contemporary",
+            "wonderful"
         ]
     },
     "noun_numeric": {
@@ -23,10 +23,10 @@
             2
         ],
         "location": [
-            "1"
+            1
         ],
         "property": [
-            "1"
+            1
         ]
     },
     "noun_relations": {}

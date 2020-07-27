@@ -21,6 +21,23 @@ def set_default(obj):
     raise TypeError
 
 
+# Just some negations, should be generalized
+ENGLISH_NEGATIONS = ["no", "not"]
+
+
+def has_negation(phrase):
+    """
+    Very basic negation finder for phrases
+    :param phrase:
+    :return:
+    """
+    for token in phrase:
+
+        if token.text.lower() in ENGLISH_NEGATIONS:
+            return True
+
+    return False
+
 def is_relevant_attribute(token):
     """
 
@@ -79,22 +96,23 @@ class Analysis:
             relations = [[item2, determiner]]
             self.noun_relations[item1] = relations
 
-    def add_default_attribute(self, item):
+    def add_default_attribute(self, item, value):
         """
         When there is only the mention of an item
         We assume for Western European language
         presence of article
         :param item:
         :param determiner:
+        :param value: 0 or 1 usually, consider other
         :return:
         """
         dictionary = self.get_dict("NUM")
         if item in dictionary:
             attributes = dictionary[item]
             # This needs to be generalized
-            attributes.add("1")
+            attributes.add(value)
         else:
-            dictionary[item] = set(["1"])
+            dictionary[item] = set([value])
 
     def add_attribute(self, item, original_token, determiner):
         """
@@ -205,7 +223,6 @@ class HouseAnalyzer:
 
                         if not Range(start, len(noun_phrase.text) + start).intersection(covered):
                             item = self.triggers_to_keys[trigger]
-
                             covered.add(Range(noun_phrase.start, noun_phrase.end))
                             self.process_np(item, noun_phrase, doc, analysis)
 
@@ -230,12 +247,16 @@ class HouseAnalyzer:
                 if self.is_numeric_of_determiner(token, doc):
                     analysis.add_relation(item, determiner, doc[token.i + 1].text)
                 else:
+
                     analysis.add_attribute(item, token, determiner)
         if not attribute_found:
             # Eventually we can check here the presence of
             # an article for EN/NO/DE/NL/ES etc, not for Slavic languages
             # We assume there is at least one
-            analysis.add_default_attribute(item)
+            if has_negation(noun_phrase):
+                analysis.add_default_attribute(item, 0)
+            else:
+                analysis.add_default_attribute(item, 1)
 
     def is_numeric_of_determiner(self, token, doc):
         """

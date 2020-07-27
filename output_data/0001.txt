@@ -22,17 +22,17 @@
             2
         ],
         "garden": [
-            "1"
+            1
         ],
         "living room": [
-            "1"
+            1
         ],
         "location": [
-            "1"
+            1
         ],
         "property": [
-            2,
-            "1"
+            1,
+            2
         ]
     },
     "noun_relations": {}
