@@ -1,0 +1,51 @@
+{
+    "noun_adjectives": {
+        "bathroom": [
+            "additional"
+        ],
+        "bedroom": [
+            "detached",
+            "further",
+            "Edwardian",
+            "substantial",
+            "double",
+            "handsome"
+        ],
+        "garden": [
+            "attractive"
+        ],
+        "living room": [
+            "front"
+        ],
+        "location": [
+            "popular"
+        ],
+        "property": [
+            "detached",
+            "Edwardian",
+            "substantial",
+            "handsome"
+        ]
+    },
+    "noun_numeric": {
+        "bathroom": [
+            3
+        ],
+        "bedroom": [
+            2,
+            3,
+            6
+        ],
+        "property": [
+            6
+        ]
+    },
+    "noun_relations": {
+        "garden": [
+            [
+                50.0,
+                "ft"
+            ]
+        ]
+    }
+}

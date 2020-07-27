@@ -1,0 +1,29 @@
+{
+    "noun_adjectives": {
+        "garden": [
+            "historic"
+        ],
+        "living room": [
+            "generous"
+        ],
+        "location": [
+            "central"
+        ],
+        "property": [
+            "flexible",
+            "Spacious"
+        ]
+    },
+    "noun_numeric": {
+        "bathroom": [
+            2
+        ],
+        "bedroom": [
+            2
+        ],
+        "property": [
+            2
+        ]
+    },
+    "noun_relations": {}
+}

@@ -1,0 +1,49 @@
+
+This projects analyzes documents about houses and generates
+a basic analysis of interesting nouns together with related
+adjectives and numerical values
+
+There is some basic lingware in ling_data.
+Input_data and output_data contain initial input and output,
+although a real system would not be writing in and out of
+text files.
+
+The decision was made to go beyond adjectives and numerical
+values directly attached to the nouns and add a third component,
+of numerical values attached to some unit (area) that is
+related to the noun. Case: 50 feet ...
+This could be extended to represent actual relations.
+
+All numerical values were presented. We opted to keep it like
+that, although the most likely candidates are those with the
+highest values (2 rooms here, 2 rooms there, 4 rooms).
+
+Ideally, some semantic reasoner containing some basic relations
+representing what features a household might have and what
+logic is possible could greatly enhance the accuracy of the
+analyzer.
+
+Spacy was chosen to NLTK because it has a document similarity
+component that is straightforward and performant, apart from
+all the rest. Both NLTK and Spacy offer good possibilities,
+NLTK offering probably much more control over certain
+linguistic features but one needs a bit more of time to
+extend them properly.
+Spacy's models seem to be maintained more often lately.
+Spacy would offer eventually more support if one decides
+to use its NER functionality (the newest transformer model
+might also be another option).
+
+This system could easily be extended by using gensim word2vec
+possibilities, even if these would show their true value
+with a combination of lots of domain specific data and
+some general corpus.
+
+Remarks:
+
+- Unit tests are not complete. For instance, the core analysis
+module should have a whole series of tests
+- A possible regression tests should be added as well
+- WordNet could have been used for extending the model and
+calculating semantic similarity, at least for English
+(there are other Wordnets out there but with other licenses)

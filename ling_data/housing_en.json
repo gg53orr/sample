@@ -1,0 +1,8 @@
+{
+	"bathroom": ["bathroom", "bath"],
+	"bedroom": ["bedroom"],
+	"living room": ["living room", "reception", "reception room", "receptions room", "reception area", "reception space"],
+	"property": ["apartment", "maisonette", "house", "accommodation", "home", "flat"],
+	"garden": ["garden", "yard"],
+	"location": ["location"]
+}

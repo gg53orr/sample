@@ -1,0 +1,27 @@
+{
+    "noun_adjectives": {
+        "bathroom": [
+            "further"
+        ],
+        "bedroom": [
+            "double"
+        ],
+        "living room": [
+            "large",
+            "open"
+        ],
+        "property": [
+            "wonderful",
+            "contemporary"
+        ]
+    },
+    "noun_numeric": {
+        "bathroom": [
+            2.0
+        ],
+        "bedroom": [
+            2
+        ]
+    },
+    "noun_relations": {}
+}

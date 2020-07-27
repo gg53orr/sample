@@ -1,0 +1,27 @@
+{
+    "noun_adjectives": {
+        "bedroom": [
+            "third",
+            "double"
+        ],
+        "living room": [
+            "top"
+        ],
+        "location": [
+            "Central"
+        ],
+        "property": [
+            "spacious"
+        ]
+    },
+    "noun_numeric": {
+        "bathroom": [
+            2
+        ],
+        "bedroom": [
+            2,
+            3.0
+        ]
+    },
+    "noun_relations": {}
+}
