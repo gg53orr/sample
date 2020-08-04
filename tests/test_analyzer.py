@@ -27,6 +27,7 @@ class TestHouseAnalyzer(unittest.TestCase):
 
         analysis2 = analyzer.process_entry("The house has 4 bedrooms and 2 bathrooms")
         numeric2 = analysis2.get_attributes("numeric")
+        json = analysis2.to_json()
         self.assertTrue("bedroom" in numeric2)
         self.assertTrue(4 in numeric2["bedroom"])
         self.assertTrue("bathroom" in numeric2)
@@ -56,15 +57,13 @@ class TestHouseAnalyzer(unittest.TestCase):
         hits = 0
         for index, an_input in enumerate(inputs):
             analysis = analyzer.process_entry(an_input)
-
             numeric_dictionary = analysis.get_attributes("numeric")
+            json = analysis.to_json()
             possibilities = list(numeric_dictionary["bathroom"])
             if possibilities == expected_bathrooms[index]:
                 hits += 1
 
         self.assertTrue(hits == 3)
-
-
 
     def test_numeric_relations(self):
         """

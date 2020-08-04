@@ -1,11 +1,5 @@
 {
     "noun_adjectives": {
-        "garden": [
-            "historic"
-        ],
-        "living room": [
-            "generous"
-        ],
         "location": [
             "central"
         ],

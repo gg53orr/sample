@@ -1,14 +1,7 @@
 {
     "noun_adjectives": {
         "bedroom": [
-            "third",
             "double"
-        ],
-        "living room": [
-            "top"
-        ],
-        "location": [
-            "Central"
         ],
         "property": [
             "spacious"
@@ -19,8 +12,7 @@
             2
         ],
         "bedroom": [
-            2,
-            3.0
+            2
         ],
         "living room": [
             1

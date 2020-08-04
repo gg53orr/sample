@@ -1,15 +1,11 @@
 {
     "noun_adjectives": {
-        "bedroom": [
-            "Edwardian",
-            "delightful"
-        ],
         "garden": [
             "wonderful"
         ],
         "property": [
-            "Edwardian",
-            "delightful"
+            "delightful",
+            "Edwardian"
         ]
     },
     "noun_numeric": {
@@ -24,8 +20,7 @@
             1
         ],
         "property": [
-            1,
-            4
+            1
         ]
     },
     "noun_relations": {}

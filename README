@@ -2,7 +2,16 @@
 This projects analyzes documents about houses and generates
 a basic analysis of interesting nouns together with related
 adjectives and numerical values
+**********************************************************
+Basic requirements: Python3
 
+Project can be tested by running
+python3 analyzer/main.py
+
+The script there reads files from input_data and prints out
+results in output_data.
+
+**********************************************************
 There is some basic lingware in ling_data.
 Input_data and output_data contain initial input and output,
 although a real system would not be writing in and out of

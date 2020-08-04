@@ -4,11 +4,7 @@
             "additional"
         ],
         "bedroom": [
-            "Edwardian",
-            "substantial",
-            "detached",
             "further",
-            "handsome",
             "double"
         ],
         "garden": [
@@ -21,10 +17,8 @@
             "popular"
         ],
         "property": [
-            "Edwardian",
-            "substantial",
-            "handsome",
-            "detached"
+            "detached",
+            "Edwardian"
         ]
     },
     "noun_numeric": {

@@ -6,12 +6,7 @@
         "bedroom": [
             "double"
         ],
-        "living room": [
-            "open",
-            "large"
-        ],
         "property": [
-            "contemporary",
             "wonderful"
         ]
     },

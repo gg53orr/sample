@@ -29,7 +29,7 @@ class NumberConverter:
             return self.basic_numbers[text]
         try:
             return float(text)
-        except:
+        except ValueError:
             return NUMBER_ERROR
 
 

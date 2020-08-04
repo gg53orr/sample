@@ -8,6 +8,7 @@ from ranges import RangeSet, Range
 import spacy
 
 from normalizer import TokenNormalizer
+from nlp_utils import is_relevant_attribute, has_negation, is_child
 
 
 def set_default(obj):
@@ -19,40 +20,6 @@ def set_default(obj):
     if isinstance(obj, set):
         return list(obj)
     raise TypeError
-
-
-# Just some negations, should be generalized
-ENGLISH_NEGATIONS = ["no", "not"]
-
-
-def has_negation(phrase):
-    """
-    Very basic negation finder for phrases
-    :param phrase:
-    :return:
-    """
-    for token in phrase:
-
-        if token.text.lower() in ENGLISH_NEGATIONS:
-            return True
-
-    return False
-
-def is_relevant_attribute(token):
-    """
-
-    :param token: Spacy token
-    :return: True if this is a relevant token
-    giving some attribute to the noun
-    """
-    if not token.text.isalnum():
-        # Sometimes the tagger can get non
-        # alphanumeric wrong
-        return False
-
-    if token.pos_ == "ADJ" or token.pos_ == "NUM":
-        return True
-    return False
 
 
 class Analysis:
@@ -159,12 +126,20 @@ class HouseAnalyzer:
     """
     The main analyzer
     """
-
     def __init__(self, language: str = "en"):
 
-        self.nlp = spacy.load(language + "_core_web_sm")
-        resource = os.path.join(".", "ling_data", "housing_" + language + ".json")
+        self.__load_resources(language)
         self.measure_words = ["ft", "feet"]
+        self.normalizer = TokenNormalizer()
+        self.do_general_analysis = False
+        self.all_tokens = Counter()
+
+    def __load_resources(self, language: str):
+
+        self.nlp = spacy.load(language + "_core_web_sm")
+
+        resource = os.path.join(".", "ling_data", "housing_" + language + ".json")
+        # Loading two dictionaries to access the linguistic semantic data
         self.housing_dict = dict()
         self.triggers_to_keys = dict()
         with open(resource, encoding="utf-8") as json_file:
@@ -176,9 +151,6 @@ class HouseAnalyzer:
                 self.triggers_to_keys[item] = key
         self.all_triggers = list(self.triggers_to_keys.keys())
         self.all_triggers.sort(key=len, reverse=True)  # sorts by descending length
-        self.normalizer = TokenNormalizer()
-        self.do_general_analysis = False
-        self.all_tokens = Counter()
 
     def count_tokens(self, sent):
         """
@@ -222,41 +194,46 @@ class HouseAnalyzer:
                         start = noun_phrase.text.lower().index(trigger)
 
                         if not Range(start, len(noun_phrase.text) + start).intersection(covered):
-                            item = self.triggers_to_keys[trigger]
+
                             covered.add(Range(noun_phrase.start, noun_phrase.end))
-                            self.process_np(item, noun_phrase, doc, analysis)
+                            self.__process_np(trigger, noun_phrase, doc, analysis)
 
         return analysis
 
-    def process_np(self, item, noun_phrase, doc, analysis):
+    def __process_np(self, trigger, noun_phrase, doc, analysis):
         """
 
-        :param item:
+        :param trigger:
         :param noun_phrase:
         :param doc:
         :param analysis:
         :return:
         """
         attribute_found = False
+        noun = self.triggers_to_keys[trigger]
+
         for token in noun_phrase:
 
             if is_relevant_attribute(token):
-                # We check next
-                determiner = self.normalizer.normalize_token(token)
-                attribute_found = True
-                if self.is_numeric_of_determiner(token, doc):
-                    analysis.add_relation(item, determiner, doc[token.i + 1].text)
-                else:
 
-                    analysis.add_attribute(item, token, determiner)
+                attribute_found = True
+
+                if self.is_numeric_of_determiner(token, doc):
+
+                    determiner = self.normalizer.normalize_token(token)
+                    analysis.add_relation(noun, determiner, doc[token.i + 1].text)
+                else:
+                    determiner = self.normalizer.normalize_token(token)
+                    if is_child(token, trigger):
+                        analysis.add_attribute(noun, token, determiner)
         if not attribute_found:
             # Eventually we can check here the presence of
             # an article for EN/NO/DE/NL/ES etc, not for Slavic languages
             # We assume there is at least one
             if has_negation(noun_phrase):
-                analysis.add_default_attribute(item, 0)
+                analysis.add_default_attribute(noun, 0)
             else:
-                analysis.add_default_attribute(item, 1)
+                analysis.add_default_attribute(noun, 1)
 
     def is_numeric_of_determiner(self, token, doc):
         """

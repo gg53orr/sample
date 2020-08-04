@@ -8,7 +8,7 @@ from normalizer import TokenNormalizer, NumberConverter, NUMBER_ERROR
 LOGGER = logging.getLogger(__name__)
 
 
-class TestHouseAnalyzer(unittest.TestCase):
+class TestNormalizer(unittest.TestCase):
     """
     Testing the core
     """
@@ -33,6 +33,7 @@ class TestHouseAnalyzer(unittest.TestCase):
             output = converter.to_number(example)
             LOGGER.debug(output)
             self.assertTrue(output == results[index])
+
 
 if __name__ == '__main__':
 
