@@ -6,6 +6,6 @@ numpy==1.18.1
 spacy==2.3.2
 pytest==5.3.5
 seaborn==0.10.0
-scipy==1.4.1
+scipy==1.10.0
 #python -m spacy download en_core_web_sm
 #python -m spacy download en_core_web_lg
